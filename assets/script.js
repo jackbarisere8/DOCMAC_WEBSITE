@@ -86,15 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const link = event.target.closest('a');
       if (!link) return;
       event.preventDefault();
-      const destination = new URL(link.href, window.location.href);
       closeMenu();
-      window.setTimeout(() => {
-        if (destination.pathname === window.location.pathname && destination.hash) {
-          window.location.hash = destination.hash;
-        } else {
-          window.location.assign(destination.href);
-        }
-      }, 20);
+      window.location.href = link.href;
     });
 
     document.addEventListener('keydown', (event) => {
