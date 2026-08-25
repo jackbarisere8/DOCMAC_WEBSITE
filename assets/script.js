@@ -28,6 +28,32 @@ document.addEventListener('DOMContentLoaded', () => {
     menuScrim.setAttribute('aria-label', 'Close navigation menu');
     document.body.append(menuScrim);
 
+    const appearance = document.createElement('div');
+    appearance.className = 'drawer-appearance';
+    appearance.innerHTML = '<span>Appearance</span><div><button type="button" data-drawer-theme="light">Light</button><button type="button" data-drawer-theme="dark">Dark</button></div>';
+    siteNavigation.append(appearance);
+
+    const setDrawerTheme = (theme) => {
+      const isDark = theme === 'dark';
+      siteNavigation.classList.toggle('drawer-dark', isDark);
+      appearance.querySelectorAll('[data-drawer-theme]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.drawerTheme === theme));
+      });
+      try {
+        localStorage.setItem('docmac-drawer-theme', theme);
+      } catch (_) {
+        // The drawer still works when storage is unavailable.
+      }
+    };
+
+    let savedDrawerTheme = 'light';
+    try {
+      savedDrawerTheme = localStorage.getItem('docmac-drawer-theme') || 'light';
+    } catch (_) {
+      // Use the light drawer by default when storage is unavailable.
+    }
+    setDrawerTheme(savedDrawerTheme);
+
     const closeMenu = () => {
       siteHeader.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
@@ -51,8 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuScrim.addEventListener('click', closeMenu);
 
+    appearance.addEventListener('click', (event) => {
+      const themeButton = event.target.closest('[data-drawer-theme]');
+      if (themeButton) setDrawerTheme(themeButton.dataset.drawerTheme);
+    });
+
     siteNavigation.addEventListener('click', (event) => {
-      if (event.target.closest('a')) closeMenu();
+      const link = event.target.closest('a');
+      if (!link) return;
+      event.preventDefault();
+      const destination = new URL(link.href, window.location.href);
+      closeMenu();
+      window.setTimeout(() => {
+        if (destination.pathname === window.location.pathname && destination.hash) {
+          window.location.hash = destination.hash;
+        } else {
+          window.location.assign(destination.href);
+        }
+      }, 20);
     });
 
     document.addEventListener('keydown', (event) => {
@@ -61,6 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => {
       if (window.innerWidth > 980) closeMenu();
+    });
+  }
+
+  const releaseHistoryToggle = document.getElementById('release-history-toggle');
+  const previousReleases = document.getElementById('previous-releases');
+  if (releaseHistoryToggle && previousReleases) {
+    releaseHistoryToggle.addEventListener('click', () => {
+      const isExpanded = releaseHistoryToggle.getAttribute('aria-expanded') === 'true';
+      releaseHistoryToggle.setAttribute('aria-expanded', String(!isExpanded));
+      previousReleases.hidden = isExpanded;
+      releaseHistoryToggle.innerHTML = isExpanded
+        ? 'See previous releases <span aria-hidden="true">+</span>'
+        : 'Hide previous releases <span aria-hidden="true">−</span>';
     });
   }
 
