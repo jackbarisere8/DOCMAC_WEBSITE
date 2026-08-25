@@ -1,8 +1,8 @@
 const DOCMAC_CONFIG = {
   // This GitHub asset endpoint downloads the APK directly; it does not open
   // the release-notes page in the visitor's browser.
-  downloadUrl: 'https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk',
-  version: 'v1.0.3'
+  downloadUrl: 'https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk',
+  version: 'v1.0.4'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
