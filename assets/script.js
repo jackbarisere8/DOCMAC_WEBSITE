@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const setDrawerTheme = (theme) => {
       const isDark = theme === 'dark';
       siteNavigation.classList.toggle('drawer-dark', isDark);
+      document.documentElement.classList.toggle('site-dark', isDark);
+      document.querySelector('meta[name="theme-color"]')?.setAttribute(
+        'content',
+        isDark ? '#0e1116' : '#0a3d91',
+      );
       appearance.querySelectorAll('[data-drawer-theme]').forEach((button) => {
         button.setAttribute('aria-pressed', String(button.dataset.drawerTheme === theme));
       });
