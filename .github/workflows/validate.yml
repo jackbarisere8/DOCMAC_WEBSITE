@@ -39,5 +39,23 @@ jobs:
       - name: Ensure generated files are committed
         run: git diff --exit-code -- releases sitemap.xml
 
+      - name: Restore APK test fixture
+        id: apk-fixture
+        uses: actions/cache@v5
+        with:
+          path: .cache/apk/v1.0.4/app-release.apk
+          key: apk-fixture-v1.0.4
+
+      - name: Download APK test fixture
+        if: steps.apk-fixture.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/apk/v1.0.4
+          curl --fail --location --retry 3 --silent --show-error \
+            --output .cache/apk/v1.0.4/app-release.apk \
+            https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk
+          echo "1d4edc3c546e0818884eafeb6bbde3cb911668109871912c7809818ac1da2e6c  .cache/apk/v1.0.4/app-release.apk" \
+            | sha256sum --check --strict
+
       - name: Run backend test suite
         run: npm test
