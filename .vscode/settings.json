@@ -1,3 +1,27 @@
 {
-    "livePreview.defaultPreviewPath": "/index.html"
+  "livePreview.defaultPreviewPath": "/index.html",
+  "files.associations": {
+    "*.sql": "sqlite",
+    "releases.json": "json",
+    "site.webmanifest": "json"
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["releases.json"],
+      "schema": {
+        "type": "object",
+        "required": ["app", "releases"],
+        "properties": {
+          "app": { "type": "string" },
+          "channel": { "type": "string" },
+          "signing_certificate_fingerprint": { "type": "string" },
+          "releases": { "type": "array" }
+        }
+      }
+    }
+  ],
+  "typescript.validate.enable": true
 }

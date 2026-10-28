@@ -1,0 +1,196 @@
+# Phase 0 release pipeline for the Flutter app repository (jackbarisere8/DOCMAC).
+# Copy this file into the app repository's .github/workflows/ directory.
+# Builds a signed APK, publishes it as a GitHub Release, and lets the website's
+# Sync Releases workflow add it to the public catalogue.
+#
+# The future API/verifier release pipeline is documented in
+# docs/BACKEND_ARCHITECTURE.md and is not used here.
+name: Release APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        description: 'Version name without a leading "v" (e.g. 1.0.5)'
+        required: true
+        type: string
+      versionCode:
+        description: 'Positive integer version code (e.g. 106)'
+        required: true
+        type: string
+      channel:
+        description: 'Release Channel'
+        required: true
+        type: choice
+        options:
+          - stable
+          - beta
+        default: stable
+      notes:
+        description: 'Release notes / changelog'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-apk-${{ inputs.channel }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build, Verify, and Publish Android APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: production # Requires manual approval in GitHub repository settings
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Validate release inputs
+        env:
+          VERSION_NAME: ${{ inputs.versionName }}
+          VERSION_CODE: ${{ inputs.versionCode }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$VERSION_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::versionName must look like 1.0.5 or 1.0.5-beta.1 (no leading v)."
+            exit 1
+          fi
+          if ! [[ "$VERSION_CODE" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::versionCode must be a positive integer."
+            exit 1
+          fi
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          gradle-version: '9.1.0'
+
+      - name: Restore signing keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for name in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is not configured in the production environment."
+              exit 1
+            fi
+          done
+
+          KEYSTORE_PATH="$RUNNER_TEMP/docmac-upload.jks"
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_PATH"
+          chmod 600 "$KEYSTORE_PATH"
+
+          if ! keytool -list -keystore "$KEYSTORE_PATH" -storepass "$KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+            echo "::error::The decoded keystore could not be opened with KEYSTORE_PASSWORD."
+            exit 1
+          fi
+
+          {
+            printf 'storePassword=%s\n' "$KEYSTORE_PASSWORD"
+            printf 'keyPassword=%s\n' "$KEY_PASSWORD"
+            printf 'keyAlias=%s\n' "$KEY_ALIAS"
+            printf 'storeFile=%s\n' "$KEYSTORE_PATH"
+          } > android/key.properties
+          chmod 600 android/key.properties
+
+      - name: Prepare Android build
+        run: |
+          set -euo pipefail
+
+          # The app's gradle.properties records a Windows-local JDK path. It
+          # does not exist on the Linux runner, so remove it for CI.
+          sed -i '/^[[:space:]]*org\.gradle\.java\.home=/d' android/gradle.properties
+
+          # Keep the Gradle daemon within the runner's memory budget.
+          sed -i 's/-Xmx8G/-Xmx4G/' android/gradle.properties
+
+          # settings.gradle.kts requires flutter.sdk in local.properties.
+          ANDROID_SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          {
+            echo "flutter.sdk=$FLUTTER_ROOT"
+            if [ -n "$ANDROID_SDK" ]; then
+              echo "sdk.dir=$ANDROID_SDK"
+            fi
+          } > android/local.properties
+
+          # The wrapper JAR and scripts are gitignored in the app repository.
+          if [ ! -x android/gradlew ]; then
+            (cd android && gradle wrapper --gradle-version 9.1.0)
+          else
+            chmod +x android/gradlew
+          fi
+
+      - name: Build signed APK
+        env:
+          VERSION_NAME: ${{ inputs.versionName }}
+          VERSION_CODE: ${{ inputs.versionCode }}
+        run: |
+          set -euo pipefail
+          flutter pub get
+          flutter build apk --release \
+            --build-name="$VERSION_NAME" \
+            --build-number="$VERSION_CODE"
+
+      - name: Verify APK artifact
+        run: |
+          set -euo pipefail
+          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+          if [ ! -f "$APK_PATH" ]; then
+            echo "::error::Flutter did not produce the expected signed APK at $APK_PATH."
+            echo "Check the release signing configuration and the KEYSTORE_* secrets."
+            exit 1
+          fi
+          ls -lh "$APK_PATH"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: v${{ inputs.versionName }}
+          NOTES: ${{ inputs.notes }}
+          CHANNEL: ${{ inputs.channel }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "::error::Release $TAG already exists. Bump versionName and versionCode."
+            exit 1
+          fi
+
+          args=(--title "Docmac $TAG" --notes "$NOTES" --target "$GITHUB_SHA")
+          if [ "$CHANNEL" = "beta" ]; then
+            args+=(--prerelease)
+          fi
+
+          gh release create "$TAG" build/app/outputs/flutter-apk/app-release.apk "${args[@]}"
+
+      - name: Trigger website catalogue sync
+        env:
+          GH_TOKEN: ${{ secrets.WEBSITE_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "WEBSITE_SYNC_TOKEN is not set; the website will pick up this release on its next six-hour sync."
+            exit 0
+          fi
+          gh workflow run sync-releases.yml \
+            --repo jackbarisere8/DOCMAC_WEBSITE \
+            --ref main

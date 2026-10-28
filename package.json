@@ -1,0 +1,28 @@
+{
+  "name": "docmac-website",
+  "version": "1.0.4",
+  "description": "Docmac Android App Release Platform and Website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 backend/tests/api.test.ts backend/tests/admin.test.ts backend/tests/phase3.test.ts backend/tests/phase4.test.ts",
+    "test:api": "node --test --test-concurrency=1 backend/tests/api.test.ts",
+    "test:admin": "node --test --test-concurrency=1 backend/tests/admin.test.ts",
+    "test:phase3": "node --test --test-concurrency=1 backend/tests/phase3.test.ts",
+    "test:phase4": "node --test --test-concurrency=1 backend/tests/phase4.test.ts",
+    "validate": "node scripts/validate.mjs && html-validate \"*.html\" \"releases/*.html\"",
+    "validate:html": "html-validate \"*.html\" \"releases/*.html\"",
+    "build": "node scripts/build-release-pages.mjs && node scripts/build-site.mjs",
+    "build:pages": "node scripts/build-release-pages.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "backup": "node backend/scripts/backup-d1.mjs",
+    "restore:drill": "node backend/scripts/restore-d1.mjs",
+    "health:local": "node scripts/health-check.mjs --local",
+    "load:test": "node backend/scripts/load-test.mjs --concurrency=10 --requests=100"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "html-validate": "^11.17.0"
+  }
+}
+

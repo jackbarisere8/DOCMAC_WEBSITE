@@ -1,0 +1,19 @@
+# Docmac Official Android APK SHA-256 Checksums
+# Generated: 2026-10-25T12:42:58.798Z
+# Signing Certificate SHA-256: 40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6
+#
+# Download filenames use the pattern docmac-<version>.apk.
+# Rename your downloaded app-release.apk to match before verifying.
+#
+# Verification on Linux/macOS:
+#   sha256sum -c checksums.txt
+# Verification on Windows:
+#   certutil -hashfile docmac-<version>.apk SHA256
+#
+# Latest release: v1.0.4 (docmac-1.0.4.apk)
+
+1d4edc3c546e0818884eafeb6bbde3cb911668109871912c7809818ac1da2e6c  docmac-1.0.4.apk
+aeb2f1cee5a2bf20e4e925a118c047f3d4abb558e19b64123af499a4dd7c9661  docmac-1.0.3.apk
+4feb0b2b903b285dc3fa7281c3ff3a7b63fcc0f21d034d5859fc65cad1e081c8  docmac-1.0.2.apk
+0e818533b49d739e31bc3c83716e026f032e2ffc5f6ed4bc772a13b1cfde1359  docmac-1.0.1.apk
+26459b9675dbc0b6420bee1031500a70e27b994af6adea911ff6b41a4e656767  docmac-1.0.0.apk

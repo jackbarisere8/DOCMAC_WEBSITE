@@ -1,0 +1,47 @@
+{
+  "repo": "jackbarisere8/DOCMAC",
+  "app": {
+    "slug": "docmac",
+    "name": "Docmac",
+    "packageName": "com.docmac.app",
+    "platform": "android",
+    "minSdk": 24,
+    "minAndroid": "7.0",
+    "website": "https://jackbarisere8.github.io/DOCMAC_WEBSITE/",
+    "repoUrl": "https://github.com/jackbarisere8/DOCMAC",
+    "supportEmail": "jackbarisere8@gmail.com",
+    "whatsapp": "+2349047876270"
+  },
+  "releases": {
+    "1.0.4": {
+      "channel": "stable",
+      "notes": "- Redesigned the Talk inbox and conversation experience.\n- Added in-conversation message sending.\n- Updated Talk interaction coverage and removed the obsolete archive route.\n- Bumped the app to version 1.0.4 (build 5).",
+      "yanked": false,
+      "forceUpdate": false
+    },
+    "1.0.3": {
+      "channel": "stable",
+      "notes": "- Refined the OTP signup and onboarding flow.\n- Updated Docmac branding, including the white link logo.\n- Updated analyzer exclusions and dependencies.",
+      "yanked": false,
+      "forceUpdate": false
+    },
+    "1.0.2": {
+      "channel": "stable",
+      "notes": "- Refreshed app navigation.\n- Improved contact dialing.",
+      "yanked": false,
+      "forceUpdate": false
+    },
+    "1.0.1": {
+      "channel": "stable",
+      "notes": "- Production build of Docmac 1.0.1.\n- Enabled debug phone-auth testing support.",
+      "yanked": false,
+      "forceUpdate": false
+    },
+    "1.0.0": {
+      "channel": "stable",
+      "notes": "- First public Android release of Docmac.\n- Direct APK distribution begins.",
+      "yanked": false,
+      "forceUpdate": false
+    }
+  }
+}

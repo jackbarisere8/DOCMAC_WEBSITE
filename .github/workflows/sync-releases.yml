@@ -1,0 +1,66 @@
+name: Sync Releases
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/**'
+      - 'scripts/sync-releases.mjs'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-releases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync catalogue and rebuild release pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Sync releases from GitHub
+        run: node scripts/sync-releases.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Rebuild release pages and sitemap
+        run: npm run build:pages
+
+      - name: Commit catalogue changes
+        id: commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add releases.json checksums.txt data/apk-integrity.json releases sitemap.xml
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No catalogue changes to commit."
+          else
+            git commit -m "chore: sync release catalogue"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Commits pushed with GITHUB_TOKEN do not trigger other workflows.
+      # workflow_dispatch is the documented exception, so request a deploy
+      # explicitly after the catalogue commit lands.
+      - name: Trigger site deployment
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy-site.yml --ref "${{ github.ref_name }}"

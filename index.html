@@ -3,68 +3,840 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0a3d91" />
-  <meta name="description" content="Download Docmac for Android — a private space for the people who matter." />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#07150a" />
+  <meta name="description" content="Docmac is a private, people-first space for conversations, calls, and the people who matter. Download the official signed Android APK and verify every release." />
+  <meta name="author" content="Docmac" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://jackbarisere8.github.io/DOCMAC_WEBSITE/" />
+
+  <meta property="og:site_name" content="Docmac" />
   <meta property="og:title" content="Docmac — Your people, close." />
-  <meta property="og:description" content="A people-first space for private conversations, circles, and moments." />
+  <meta property="og:description" content="A private space for the conversations, calls, and small moments that keep real friendships alive. Download the official Android APK." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jackbarisere8.github.io/DOCMAC_WEBSITE/" />
+  <meta property="og:image" content="https://jackbarisere8.github.io/DOCMAC_WEBSITE/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Docmac — Your people, close. Official Android release." />
+  <meta property="og:locale" content="en_NG" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Docmac — Your people, close." />
+  <meta name="twitter:description" content="Private communication for the people who matter. Download the official signed Android APK." />
+  <meta name="twitter:image" content="https://jackbarisere8.github.io/DOCMAC_WEBSITE/assets/images/og-image.png" />
+
   <title>Docmac — Your people, close.</title>
-  <link rel="icon" type="image/png" href="assets/images/docmac-logo.png" />
-  <link rel="stylesheet" href="assets/styles.css?v=20260825-4" />
+
+  <link rel="icon" href="assets/images/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-normal-400-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-italic-500-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/fonts.css?v=20261026-1" />
+  <link rel="stylesheet" href="assets/styles.css?v=20261026-1" />
+  <link rel="preload" href="assets/images/editorial/hero-crowd.webp" as="image" type="image/webp" fetchpriority="high" />
+
+  <script>
+    (function () {
+      document.documentElement.classList.add('js');
+      try {
+        var stored = localStorage.getItem('docmac-theme');
+        if (stored !== 'light' && stored !== 'dark' && stored !== 'auto') {
+          var legacy = localStorage.getItem('docmac-drawer-theme');
+          stored = legacy === 'light' || legacy === 'dark' ? legacy : 'auto';
+        }
+        var dark = stored === 'dark' || (stored === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('site-dark');
+      } catch (error) {
+        /* The site still works when storage is unavailable. */
+      }
+    })();
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Docmac",
+      "description": "A private, people-first communication app for Android.",
+      "operatingSystem": "Android 7.0+",
+      "applicationCategory": "CommunicationApplication",
+      "downloadUrl": "https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk",
+      "installUrl": "https://jackbarisere8.github.io/DOCMAC_WEBSITE/#download",
+      "softwareHelp": {
+        "@type": "CreativeWork",
+        "url": "https://jackbarisere8.github.io/DOCMAC_WEBSITE/support.html"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Docmac",
+        "url": "https://jackbarisere8.github.io/DOCMAC_WEBSITE/"
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="container nav-shell">
-    <a class="brand" href="./" aria-label="Docmac home"><img src="assets/images/docmac-logo.png" alt="" width="34" height="34" /><span>docmac</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
-    <nav id="site-navigation" class="nav-links" aria-label="Primary navigation"><a href="#why-docmac">Why Docmac</a><a href="#how-it-works">Getting started</a><a href="#download">Download</a><a href="support.html">Support</a><a href="feedback.html">Feedback</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav>
-    <a class="nav-cta" href="#download">Get the app <span aria-hidden="true">↓</span></a>
-  </div></header>
+
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <img class="preloader-mark" src="assets/images/docmac-mark-blue.webp" alt="" width="128" height="128" />
+      <p class="preloader-word">docmac<i>.</i></p>
+      <p>Your people, close.</p>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="./" aria-label="Docmac home">
+        <img class="brand-mark" src="assets/images/docmac-mark-white.webp" alt="" width="29" height="29" />
+        <span class="brand-word">docmac<span class="brand-dot">.</span></span>
+      </a>
+
+      <nav id="site-navigation" class="nav-links" aria-label="Primary navigation">
+        <a class="nav-link" href="#why-docmac">Why Docmac</a>
+        <a class="nav-link" href="#how-it-works">Getting started</a>
+        <a class="nav-link" href="#releases">Releases</a>
+        <a class="nav-link" href="#download">Download</a>
+        <a class="nav-link" href="support.html">Support</a>
+        <a class="nav-link" href="feedback.html">Feedback</a>
+        <div class="drawer-appearance">
+          <span>Appearance</span>
+          <div role="group" aria-label="Color theme">
+            <button type="button" data-theme="light">Light</button>
+            <button type="button" data-theme="dark">Dark</button>
+            <button type="button" data-theme="auto">System</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-tools">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+          <span data-theme-icon aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-moon"></use></svg></span>
+        </button>
+        <a class="nav-cta" href="#download">
+          <span>Get the app</span>
+          <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+        </a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="hero-glow glow-one"></div><div class="hero-glow glow-two"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="status-dot"></span> Now available for Android</p>
-          <h1>The people who matter,<br /><span>closer than ever.</span></h1>
-          <p class="hero-lede">Docmac is a private space for your real connections — talk, share moments, and stay present without the noise of a public feed.</p>
-          <div class="hero-actions"><a class="button button-primary" href="#download">Download for Android <span aria-hidden="true">↓</span></a><a class="text-link" href="#why-docmac">See what makes it different <span aria-hidden="true">→</span></a></div>
-          <div class="hero-meta" aria-label="Release information"><span><b>v1.0.4</b> latest release</span><span class="meta-rule"></span><span>Android 7.0 and newer</span></div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media">
+        <img src="assets/images/editorial/hero-crowd.webp" alt="" width="2400" height="1500" fetchpriority="high" decoding="async" />
+      </div>
+      <div class="hero-shade"></div>
+      <div class="hero-glow"></div>
+      <svg class="hero-orbit" viewBox="0 0 760 760" aria-hidden="true" focusable="false">
+        <path class="orbit-faint" d="M380 54a326 326 0 1 0 0 652 326 326 0 1 0 0-652Z" />
+        <path class="orbit-line" d="M380 118c145 0 262 117 262 262S525 642 380 642 118 525 118 380s117-262 262-262Z" />
+        <path class="orbit-faint" d="M380 188c106 0 192 86 192 192s-86 192-192 192-192-86-192-192 86-192 192-192Z" />
+        <path class="orbit-line" d="M380 256c68 0 124 56 124 124s-56 124-124 124-124-56-124-124 56-124 124-124Z" />
+        <circle class="orbit-node" cx="642" cy="380" r="4" />
+        <circle class="orbit-node-soft" cx="188" cy="380" r="3.3" />
+        <circle class="orbit-node" cx="380" cy="118" r="3" />
+        <circle class="orbit-node-soft" cx="380" cy="642" r="3.6" />
+      </svg>
+
+      <div class="shell">
+        <div class="hero-layout">
+          <div class="hero-copy" data-reveal>
+            <h1 class="hero-title" id="hero-title">Your people,<br /><em>close.</em><br />The rest, quiet.</h1>
+            <p class="hero-lede">Docmac is a private space for the conversations, calls, and small moments that keep real friendships alive. No public feed. No performance. Just the people you chose.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#download">
+                <span>Download for Android</span>
+                <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+              </a>
+              <a class="btn btn-ghost-light" href="#why-docmac">
+                <span>Why Docmac</span>
+                <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-arrow-down"></use></svg></span>
+              </a>
+            </div>
+
+            <div class="hero-releases" role="group" aria-label="Browse Docmac releases">
+              <div class="hero-releases-head"><span>Release archive</span><span><span data-release-count>5</span> signed builds</span></div>
+              <div class="release-tabs" data-release-tabs>
+                <button class="release-tab is-active" type="button" aria-pressed="true" data-release-tab data-version="1.0.4" data-size="60.5 MB" data-date="25 Aug 2026" data-link="releases/1.0.4.html">
+                  <strong>v1.0.4</strong><span>60.5 MB</span>
+                </button>
+                <button class="release-tab" type="button" aria-pressed="false" data-release-tab data-version="1.0.3" data-size="59.1 MB" data-date="22 Aug 2026" data-link="releases/1.0.3.html">
+                  <strong>v1.0.3</strong><span>59.1 MB</span>
+                </button>
+                <button class="release-tab" type="button" aria-pressed="false" data-release-tab data-version="1.0.2" data-size="58.4 MB" data-date="21 Aug 2026" data-link="releases/1.0.2.html">
+                  <strong>v1.0.2</strong><span>58.4 MB</span>
+                </button>
+                <button class="release-tab" type="button" aria-pressed="false" data-release-tab data-version="1.0.1" data-size="58.2 MB" data-date="18 Aug 2026" data-link="releases/1.0.1.html">
+                  <strong>v1.0.1</strong><span>58.2 MB</span>
+                </button>
+                <button class="release-tab" type="button" aria-pressed="false" data-release-tab data-version="1.0.0" data-size="58.2 MB" data-date="18 Aug 2026" data-link="releases/1.0.0.html">
+                  <strong>v1.0.0</strong><span>58.2 MB</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-hud" aria-label="Docmac release overview" data-reveal style="--reveal-delay: 120ms;">
+            <div class="hud-source glass">
+              <span class="hud-source-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-shield-check"></use></svg></span>
+              <p><strong>Verified source</strong><span>GitHub Releases · jackbarisere8/DOCMAC</span></p>
+            </div>
+
+            <div class="hud-stack">
+              <div class="hud-card glass hud-people">
+                <img class="hud-thumb" src="assets/images/editorial/portrait-friends.webp" alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+                <div class="hud-people-copy">
+                  <span class="hud-kicker">Built around your circle</span>
+                  <strong>People first. Feed never.</strong>
+                  <p>Orbit · Talk · Live</p>
+                </div>
+              </div>
+
+              <div class="hud-card glass">
+                <div class="hud-release-head">
+                  <span class="hud-kicker">Current release</span>
+                  <span class="hud-live"><i></i> Stable</span>
+                </div>
+                <strong class="hud-version" id="hero-version">v1.0.4</strong>
+                <dl class="hud-meta">
+                  <div><dt>Size</dt><dd id="hero-size">60.5 MB</dd></div>
+                  <div><dt>Android</dt><dd>7.0+</dd></div>
+                  <div><dt>Released</dt><dd id="hero-date">25 Aug 2026</dd></div>
+                </dl>
+                <a class="hud-link" id="hero-release-link" href="releases/1.0.4.html">View release details <svg class="icon icon-sm" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+
+              <div class="hud-card glass hud-integrity">
+                <div class="hud-gauge" aria-hidden="true">
+                  <svg viewBox="0 0 60 60"><circle class="gauge-track" cx="30" cy="30" r="26"></circle><circle class="gauge-fill" cx="30" cy="30" r="26"></circle></svg>
+                  <strong>100%</strong>
+                </div>
+                <div class="hud-integrity-copy">
+                  <strong>Signed and checksummed</strong>
+                  <p>SHA-256 published for every release.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
 
-        <div class="phone-scene" aria-label="A visual preview of the Docmac app">
-          <div class="scene-orbit orbit-a"></div><div class="scene-orbit orbit-b"></div><div class="scene-orbit orbit-c"></div><div class="presence-pill"><i></i> Your circle is here</div>
-          <div class="phone-frame"><div class="phone-speaker"></div><div class="phone-screen">
-            <div class="app-topbar"><img src="assets/images/docmac-logo.png" alt="" /><span>Orbit</span><b>•••</b></div>
-            <p class="screen-title">Your people<br /><strong>in one place.</strong></p>
-            <div class="orbit-map"><span class="map-ring ring-1"></span><span class="map-ring ring-2"></span><span class="map-ring ring-3"></span><span class="person p-one">A</span><span class="person p-two">J</span><span class="person p-three">M</span><span class="person p-four">S</span><span class="you-node">You <i></i></span></div>
-            <div class="now-card"><span class="avatar">J</span><p><b>Jordan is online</b><small>Send a hello or start a call</small></p><span class="call-icon">⌁</span></div>
-            <div class="app-nav"><span>◌<small>Orbit</small></span><span>◒<small>Talk</small></span><span>⌁<small>Live</small></span><span>◉<small>Me</small></span></div>
-          </div></div>
-          <div class="floating-message"><span class="mini-avatar">M</span><p><b>Maya</b><small>“I’m here whenever.”</small></p><i>↗</i></div>
+        <div class="hero-foot">
+          <span class="hero-scroll"><span class="hero-scroll-line" aria-hidden="true"></span> Scroll to explore</span>
+          <span class="hero-foot-note">Direct APK · Android 7.0+ · No store account required</span>
         </div>
       </div>
     </section>
 
-    <section id="why-docmac" class="section container">
-      <div class="section-intro"><p class="eyebrow">A calmer kind of connection</p><h2>Built for your <em>real</em> world.</h2><p>Not a content platform. Not a popularity contest. Docmac keeps the focus where it belongs: on the people you chose to keep close.</p></div>
-      <div class="feature-grid">
-        <article class="feature-card feature-main"><div class="feature-icon icon-orbit">◉</div><p class="card-label">ORBIT</p><h3>Start with people, not a feed.</h3><p>See your circle first and move naturally from a person to a conversation, a call, or a shared moment.</p><div class="mini-network" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div></article>
-        <article class="feature-card feature-blue"><div class="feature-icon">↗</div><p class="card-label">TALK</p><h3>Conversations with room to breathe.</h3><p>Private, focused messages for the people who are already part of your life.</p></article>
-        <article class="feature-card"><div class="feature-icon">⌁</div><p class="card-label">LIVE</p><h3>Show up when it counts.</h3><p>Move from a message to a live moment without making connection feel like work.</p></article>
-        <article class="feature-card feature-statement"><p>“The best social space is one that helps you be social.”</p><span>— The Docmac idea</span></article>
+    <section id="why-docmac" class="section-paper section-stack value-section">
+      <div class="shell">
+        <div class="section-top">
+          <p class="section-index">01 / The premise</p>
+        </div>
+        <h2 class="scrub-heading" data-scrub>Somewhere between a group chat and a crowded room, staying in touch lost its point. Docmac brings it back to <span class="scrub-pill" aria-hidden="true"><img src="assets/images/editorial/conversation.webp" alt="" width="1400" height="1100" loading="lazy" decoding="async" /></span> the people themselves.</h2>
+      </div>
+
+      <div class="shell value-grid">
+        <figure class="value-figure" data-reveal>
+          <img src="assets/images/editorial/portrait-friends.webp" alt="Two friends standing close together outdoors, laughing." width="1200" height="1500" loading="lazy" decoding="async" />
+          <div class="value-shade"></div>
+          <span class="value-tag"><i></i> Built around people</span>
+          <figcaption class="value-caption glass-paper">
+            <span class="value-caption-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-users-round"></use></svg></span>
+            <p><strong>Friends, not followers.</strong><span>The only audience that matters is the one you chose.</span></p>
+          </figcaption>
+        </figure>
+
+        <div class="value-right" data-reveal>
+          <div class="value-intro">
+            <p>Not another feed to maintain. Not a popularity contest. Docmac keeps the focus where it belongs.</p>
+          </div>
+
+          <div class="principles">
+            <article class="principle">
+              <div class="principle-top"><span class="principle-num">01</span><span class="principle-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-circle-dot"></use></svg></span></div>
+              <div><h3>Orbit</h3><p>Open to people, not a feed. Start with a face and move naturally from there.</p></div>
+            </article>
+            <article class="principle">
+              <div class="principle-top"><span class="principle-num">02</span><span class="principle-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-message-circle"></use></svg></span></div>
+              <div><h3>Talk</h3><p>Private conversations for the people who are already part of your life.</p></div>
+            </article>
+            <article class="principle">
+              <div class="principle-top"><span class="principle-num">03</span><span class="principle-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-phone-call"></use></svg></span></div>
+              <div><h3>Live</h3><p>Move from a message to a live moment without turning connection into a performance.</p></div>
+            </article>
+            <article class="principle">
+              <div class="principle-top"><span class="principle-num">04</span><span class="principle-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-eye-off"></use></svg></span></div>
+              <div><h3>Quiet by default</h3><p>No public stage. Docmac is built around private relationships, not an audience to grow.</p></div>
+            </article>
+          </div>
+
+          <p class="value-note">
+            <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-heart"></use></svg>
+            <span>The measure is simple: does it help you stay close to the people you chose? Everything else is secondary.</span>
+          </p>
+        </div>
       </div>
     </section>
 
-    <section id="how-it-works" class="steps-section"><div class="container"><div class="section-intro compact"><p class="eyebrow">Your first five minutes</p><h2>Download. Join. <em>Connect.</em></h2></div><ol class="steps-grid"><li><span class="step-number">01</span><h3>Get the APK</h3><p>Download the signed Docmac Android package from this official page.</p></li><li><span class="step-number">02</span><h3>Install safely</h3><p>Open the download and, if asked, allow your browser or file manager to install apps.</p></li><li><span class="step-number">03</span><h3>Make it yours</h3><p>Create your account, find your people, and begin where every good connection does.</p></li></ol></div></section>
+    <section id="releases" class="section-paper release-section">
+      <div class="shell">
+        <div class="arc-panel" data-reveal>
+          <div class="arc-contours" aria-hidden="true">
+            <svg viewBox="0 0 1200 560" preserveAspectRatio="none">
+              <path d="M-40 450c190-130 300-40 440-110s210-190 410-176 250 130 430 70" />
+              <path d="M-30 500c220-120 300-40 440-110s230-170 420-150 260 130 410 52" />
+              <path d="M-30 548c220-100 320-22 470-80s230-150 420-126 250 112 390 40" />
+              <path d="M-20 390c150-150 300-62 430-142s230-170 440-124 230 154 370 94" />
+            </svg>
+          </div>
 
-    <section id="download" class="download-section"><div class="container download-layout"><div class="download-copy"><p class="eyebrow"><span class="status-dot"></span> Official Android release</p><h2>Your circle<br />is waiting.</h2><p>Download the latest signed Docmac build directly to your phone. Previous releases are available when you need them.</p></div><aside class="release-card" aria-label="Docmac Android downloads"><div class="release-head"><img src="assets/images/docmac-logo.png" alt="" /><div><span>DOCMAC FOR ANDROID</span><strong id="release-version">v1.0.4</strong></div><b class="verified">✓</b></div><dl class="release-details"><div><dt>Format</dt><dd>Signed APK</dd></div><div><dt>Size</dt><dd>60.5 MB</dd></div><div><dt>Android</dt><dd>7.0+</dd></div></dl><div class="release-list" aria-label="Available Docmac APK releases"><p>Latest version</p><a id="download-button" class="release-option release-option-latest" href="https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk"><span><strong>v1.0.4</strong><small>Latest release</small></span><b>Download <i aria-hidden="true">↓</i></b></a><button id="release-history-toggle" class="release-history-toggle" type="button" aria-expanded="false" aria-controls="previous-releases">See previous releases <span aria-hidden="true">+</span></button><div id="previous-releases" class="previous-releases" hidden><a class="release-option" href="https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.3/app-release.apk"><span><strong>v1.0.3</strong><small>Previous release</small></span><b>Download <i aria-hidden="true">↓</i></b></a><a class="release-option" href="https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.2/app-release.apk"><span><strong>v1.0.2</strong><small>Previous release</small></span><b>Download <i aria-hidden="true">↓</i></b></a><a class="release-option" href="https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.1/app-release.apk"><span><strong>v1.0.1</strong><small>Previous release</small></span><b>Download <i aria-hidden="true">↓</i></b></a></div></div><aside class="apk-disclaimer"><strong>About Android&rsquo;s APK warning</strong><p>Android or your browser may flag an APK downloaded from the web because it is not installed through Google Play. That warning does not by itself mean the file is harmful. This page links only to Docmac&rsquo;s official signed GitHub release. Download only from this website, check that the file is named <code>app-release.apk</code>, and do not install modified copies from other sources.</p></aside><p class="release-note">By downloading, you agree to the <a href="terms.html">Terms</a> and acknowledge the <a href="privacy.html">Privacy Policy</a>.</p><p class="direct-download-note">Every version above links directly to its APK file.</p></aside></div></section>
+          <div class="arc-top">
+            <p class="arc-hint">Tap a build · use arrow keys to browse</p>
+          </div>
 
-    <section class="faq-section container"><div class="section-intro compact"><p class="eyebrow">Good to know</p><h2>Questions, <em>answered.</em></h2></div><div class="faq-list"><details><summary>Is this the official Docmac download?<span>+</span></summary><p>Yes. This page links directly to the official Docmac GitHub release. Always download Docmac from this page or the linked release page.</p></details><details><summary>Why does Android ask for permission to install?<span>+</span></summary><p>Docmac is distributed as an APK, so Android may ask you to allow installs from the browser or file manager you used. This setting can be changed again in Android settings at any time.</p></details><details><summary>What Android version do I need?<span>+</span></summary><p>Docmac supports Android 7.0 (Nougat) and newer.</p></details><details><summary>Need a hand?<span>+</span></summary><p>Visit <a href="support.html">Support</a>, email <a href="mailto:jackbarisere8@gmail.com">jackbarisere8@gmail.com</a>, or send <a href="https://wa.me/2349047876270?text=Hello%20Docmac%2C%20I%20need%20help%20with%20the%20app.">a WhatsApp message</a>.</p></details></div></section>
+          <section class="arc-stage" data-release-arc aria-roledescription="carousel" aria-label="Docmac release carousel">
+            <p class="arc-loading">Loading the signed release archive…</p>
+          </section>
+
+          <div class="arc-bottom">
+            <div class="arc-copy">
+              <h2 class="display display-sm">Every release.<br />Same <em>signature.</em></h2>
+              <p>The release history is public, the checksums are published, and every APK is signed with the same Docmac certificate.</p>
+              <a class="btn btn-primary" href="#download">
+                <span>Open download options</span>
+                <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+              </a>
+            </div>
+            <div class="arc-controls">
+              <span class="arc-count" aria-hidden="true"><span data-arc-current>01</span><span>/</span><span data-arc-total>05</span></span>
+              <button class="arc-nav" type="button" data-arc-prev aria-label="Previous release"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-left"></use></svg></button>
+              <button class="arc-nav" type="button" data-arc-next aria-label="Next release"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"></use></svg></button>
+            </div>
+          </div>
+          <p class="sr-only" data-arc-status role="status" aria-live="polite"></p>
+
+          <noscript>
+            <p class="arc-loading">The release carousel needs JavaScript. Browse all builds in the <a href="#download">download section</a> or on the <a href="https://github.com/jackbarisere8/DOCMAC/releases">Docmac GitHub releases page</a>.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-paper proof-section">
+      <div class="shell">
+        <div class="proof-grid">
+          <div class="proof-intro" data-reveal>
+            <h2 class="display">Louder isn't the same as <em>closer.</em></h2>
+            <p class="lede">No borrowed numbers. Every figure here comes from the public release record and the files in the official GitHub repository.</p>
+          </div>
+
+          <div class="proof-stat-lg" data-reveal style="--reveal-delay: 80ms;">
+            <span class="proof-num"><span data-count="5" data-count-release>5</span></span>
+            <span class="proof-label">Signed Android releases</span>
+            <p>Public builds, each with its own notes, checksum, and APK.</p>
+          </div>
+
+          <figure class="proof-photo proof-photo-tall" data-reveal style="--reveal-delay: 140ms;">
+            <img src="assets/images/editorial/laughter.webp" alt="Friends laughing together in warm afternoon light." width="1400" height="1100" loading="lazy" decoding="async" />
+            <figcaption class="proof-photo-tag"><i></i> The real metric</figcaption>
+          </figure>
+
+          <div class="proof-badge" data-reveal>
+            <span class="proof-badge-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-shield-check"></use></svg></span>
+            <p>One signing identity across every build.</p>
+          </div>
+
+          <figure class="proof-photo proof-photo-small" data-reveal style="--reveal-delay: 80ms;">
+            <img src="assets/images/editorial/conversation.webp" alt="Two people in a relaxed conversation." width="1400" height="1100" loading="lazy" decoding="async" />
+          </figure>
+
+          <div class="proof-stat" data-reveal style="--reveal-delay: 120ms;">
+            <span class="proof-num"><span data-count="1">1</span></span>
+            <span class="proof-label">Signing certificate</span>
+            <p>The same published fingerprint from v1.0.0 onward.</p>
+          </div>
+
+          <div class="proof-stat" data-reveal style="--reveal-delay: 160ms;">
+            <span class="proof-num"><span data-count="100">100</span><span class="proof-num-suffix">%</span></span>
+            <span class="proof-label">Checksum coverage</span>
+            <p>A SHA-256 hash is published for every release.</p>
+          </div>
+
+          <figure class="proof-photo proof-photo-wide" data-reveal>
+            <img src="assets/images/editorial/sunset.webp" alt="A group of friends together at sunset." width="2000" height="1300" loading="lazy" decoding="async" />
+            <figcaption class="proof-photo-overlay">
+              <span class="proof-photo-overlay-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-github"></use></svg></span>
+              <p><strong>Direct from GitHub Releases</strong><span>No third-party APK mirror. No store account required.</span></p>
+            </figcaption>
+          </figure>
+
+          <div class="proof-note" data-reveal style="--reveal-delay: 100ms;">
+            <blockquote>&ldquo;The best social space is one that helps you be <em>social.</em>&rdquo;</blockquote>
+            <footer>
+              <span>The Docmac idea</span>
+              <a href="#releases">Read the release record <svg class="icon icon-sm" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="services-wrap">
+      <div class="shell">
+        <section class="services-panel" aria-labelledby="services-title">
+          <div class="services-head">
+            <div>
+              <h2 class="display" id="services-title">A smaller internet,<br /><em>on purpose.</em></h2>
+            </div>
+            <div class="services-side">
+              <p>Four parts of the app, built around one idea: the people already in your life deserve better than an audience.</p>
+              <a class="text-link" href="#why-docmac">Explore the principles <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"></use></svg></a>
+            </div>
+          </div>
+
+          <div class="service-grid">
+            <article class="service-card is-active">
+              <img src="assets/images/editorial/portrait-friends.webp" alt="" width="1200" height="1500" loading="lazy" decoding="async" />
+              <div class="service-shade"></div>
+              <div class="service-top">
+                <h3>Orbit</h3>
+                <button class="service-toggle" type="button" aria-expanded="true" aria-label="Show Orbit details"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-plus"></use></svg></button>
+              </div>
+              <div class="service-panel">
+                <p>See your circle first, then move naturally from a person to a conversation, a call, or a shared moment.</p>
+                <a class="service-link" href="#why-docmac">People before posts <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+              <div class="service-foot"><span><i></i> People first</span><span>01</span></div>
+            </article>
+
+            <article class="service-card">
+              <img src="assets/images/editorial/conversation.webp" alt="" width="1400" height="1100" loading="lazy" decoding="async" />
+              <div class="service-shade"></div>
+              <div class="service-top">
+                <h3>Talk</h3>
+                <button class="service-toggle" type="button" aria-expanded="false" aria-label="Show Talk details"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-plus"></use></svg></button>
+              </div>
+              <div class="service-panel">
+                <p>Private, focused messages for the people who are already part of your life. No feed to check first.</p>
+                <a class="service-link" href="#download">Get the app <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-down"></use></svg></a>
+              </div>
+              <div class="service-foot"><span><i></i> Private by default</span><span>02</span></div>
+            </article>
+
+            <article class="service-card">
+              <img src="assets/images/editorial/laughter.webp" alt="" width="1400" height="1100" loading="lazy" decoding="async" />
+              <div class="service-shade"></div>
+              <div class="service-top">
+                <h3>Live</h3>
+                <button class="service-toggle" type="button" aria-expanded="false" aria-label="Show Live details"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-plus"></use></svg></button>
+              </div>
+              <div class="service-panel">
+                <p>Move from a message to a live moment without turning connection into a performance.</p>
+                <a class="service-link" href="support.html">See how it works <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+              <div class="service-foot"><span><i></i> Presence over performance</span><span>03</span></div>
+            </article>
+
+            <article class="service-card">
+              <img src="assets/images/editorial/dinner.webp" alt="" width="1800" height="1200" loading="lazy" decoding="async" />
+              <div class="service-shade"></div>
+              <div class="service-top">
+                <h3>Your space</h3>
+                <button class="service-toggle" type="button" aria-expanded="false" aria-label="Show Your space details"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-plus"></use></svg></button>
+              </div>
+              <div class="service-panel">
+                <p>No public feed to maintain. No audience to grow. Docmac keeps the focus on the relationships you chose.</p>
+                <a class="service-link" href="privacy.html">Read the privacy policy <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+              <div class="service-foot"><span><i></i> No public stage</span><span>04</span></div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section id="how-it-works" class="section-paper trust-section">
+      <div class="shell">
+        <div class="trust-head" data-reveal>
+          <div>
+            <h2 class="display">Three steps.<br /><em>No guesswork.</em></h2>
+          </div>
+          <p class="lede">A direct Android install is simple when you know exactly where the file came from and how to check it.</p>
+        </div>
+
+        <div class="trust-layout">
+          <div class="trust-media" data-trust-media data-reveal>
+            <img class="trust-img is-active" src="assets/images/editorial/phone.webp" alt="A person checking their phone in soft natural light." width="1200" height="1200" loading="lazy" decoding="async" />
+            <img class="trust-img" src="assets/images/editorial/conversation.webp" alt="Two people talking through a download check together." width="1400" height="1100" loading="lazy" decoding="async" />
+            <img class="trust-img" src="assets/images/editorial/sunset.webp" alt="Friends relaxing together at the end of the day." width="2000" height="1300" loading="lazy" decoding="async" />
+            <div class="trust-media-shade"></div>
+            <div class="trust-media-top">
+              <span class="pill pill-dark"><i></i> Official source</span>
+              <span class="pill pill-dark">Android 7.0+</span>
+            </div>
+            <div class="trust-caption glass-paper">
+              <span class="trust-caption-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+              <p><strong data-trust-caption-title>Start at the source</strong><span data-trust-caption-text>The only download linked here is the official signed Docmac release.</span></p>
+            </div>
+          </div>
+
+          <div class="trust-accordion" data-auto-accordion data-reveal style="--reveal-delay: 100ms;">
+            <div class="accordion-item is-open">
+              <h3>
+                <button class="accordion-trigger" id="trust-trigger-1" type="button" aria-expanded="true" aria-controls="trust-panel-1" data-caption-title="Start at the source" data-caption-text="The only download linked here is the official signed Docmac release." data-caption-icon="i-download">
+                  <span class="accordion-num">01</span>
+                  <span class="accordion-title">Download the official APK</span>
+                  <span class="accordion-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span>
+                </button>
+              </h3>
+              <section class="accordion-panel" id="trust-panel-1" aria-labelledby="trust-trigger-1">
+                <div><p>Use the download button on this page. It resolves to the latest signed APK on the official Docmac GitHub release. No third-party mirror is linked.</p></div>
+              </section>
+              <div class="accordion-progress" aria-hidden="true"><i></i></div>
+            </div>
+
+            <div class="accordion-item">
+              <h3>
+                <button class="accordion-trigger" id="trust-trigger-2" type="button" aria-expanded="false" aria-controls="trust-panel-2" data-caption-title="Check what you downloaded" data-caption-text="Compare the published SHA-256 before Android installs anything." data-caption-icon="i-fingerprint">
+                  <span class="accordion-num">02</span>
+                  <span class="accordion-title">Check the SHA-256</span>
+                  <span class="accordion-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span>
+                </button>
+              </h3>
+              <section class="accordion-panel" id="trust-panel-2" aria-labelledby="trust-trigger-2">
+                <div><p>Open the verification section on the download card or <a href="checksums.txt">checksums.txt</a>. On Windows run <code>certutil -hashfile app-release.apk SHA256</code>; on macOS or Linux run <code>sha256sum app-release.apk</code>. One character difference is enough to stop.</p></div>
+              </section>
+              <div class="accordion-progress" aria-hidden="true"><i></i></div>
+            </div>
+
+            <div class="accordion-item">
+              <h3>
+                <button class="accordion-trigger" id="trust-trigger-3" type="button" aria-expanded="false" aria-controls="trust-panel-3" data-caption-title="Install and stay updated" data-caption-text="Later builds install over earlier ones when the signing certificate matches." data-caption-icon="i-smartphone">
+                  <span class="accordion-num">03</span>
+                  <span class="accordion-title">Install and stay updated</span>
+                  <span class="accordion-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span>
+                </button>
+              </h3>
+              <section class="accordion-panel" id="trust-panel-3" aria-labelledby="trust-trigger-3">
+                <div><p>Android may ask you to allow installs from your browser or file manager. That is expected for a direct APK. New builds install over old ones when the certificate matches. Back up anything important before a downgrade.</p></div>
+              </section>
+              <div class="accordion-progress" aria-hidden="true"><i></i></div>
+            </div>
+
+            <div class="trust-cta">
+              <a class="btn btn-primary" href="#download">
+                <span>Open download</span>
+                <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+              </a>
+              <a class="text-link" href="support.html">Need help installing? <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+            </div>
+            <p class="trust-cta-note">Android 7.0 or newer · Signed APK · SHA-256 published</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bento-wrap">
+      <div class="shell">
+        <section class="bento-panel" aria-labelledby="bento-title">
+          <div class="bento-head" data-reveal>
+            <h2 class="display" id="bento-title">From a quick hello<br />to <em>showing up.</em></h2>
+            <p class="lede">Docmac is built for the ordinary moments that keep a friendship alive — not for the performance of having one.</p>
+          </div>
+
+          <div class="bento-grid">
+            <article class="bento-card bento-card-a">
+              <div class="bento-card-head"><span class="bento-kicker">Talk</span><span class="bento-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-message-circle"></use></svg></span></div>
+              <img src="assets/images/editorial/conversation.webp" alt="" width="1400" height="1100" loading="lazy" decoding="async" />
+              <div class="bento-card-copy">
+                <h3>The conversation is the destination.</h3>
+                <p>Private messages for the people who already matter. No feed to check first.</p>
+                <a class="text-link" href="support.html">How Docmac works <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+            </article>
+
+            <article class="bento-card bento-card-b">
+              <img src="assets/images/editorial/dinner.webp" alt="" width="1800" height="1200" loading="lazy" decoding="async" />
+              <div class="bento-card-head"><span class="bento-kicker">The whole point</span><span class="bento-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-heart"></use></svg></span></div>
+              <div class="bento-b-overlay">
+                <h3>Built for the people already in your life.</h3>
+                <div class="bento-meta"><span>Orbit</span><span>Talk</span><span>Live</span></div>
+              </div>
+            </article>
+
+            <article class="bento-card bento-card-c">
+              <div class="bento-card-head"><span class="bento-kicker">Orbit</span><span class="bento-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-users-round"></use></svg></span></div>
+              <img src="assets/images/editorial/sunset.webp" alt="" width="2000" height="1300" loading="lazy" decoding="async" />
+              <div class="bento-card-copy">
+                <h3>A home screen that feels human.</h3>
+                <p>Start with your circle, then move from a face to a conversation, call, or shared moment.</p>
+                <a class="text-link" href="#why-docmac">See the principles <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+              </div>
+            </article>
+          </div>
+
+          <div class="bento-foot">
+            <p>One app. Four ways to stay close. Android 7.0 and newer.</p>
+            <a class="btn btn-primary" href="#download">
+              <span>Get Docmac</span>
+              <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section id="download" class="section-paper download-section">
+      <div class="shell">
+        <div class="download-panel">
+          <div class="download-copy" data-reveal>
+            <h2 class="display">Your circle<br /><em>is waiting.</em></h2>
+            <p class="lede">Download the latest signed Docmac build directly to your phone. Every previous build stays online, with its checksum and release notes intact.</p>
+
+            <ul class="download-points">
+              <li>
+                <span class="point-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+                <div><strong>Direct APK</strong><span>No store account required.</span></div>
+              </li>
+              <li>
+                <span class="point-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-fingerprint"></use></svg></span>
+                <div><strong>Public checksums</strong><span>A SHA-256 hash is published for every build.</span></div>
+              </li>
+              <li>
+                <span class="point-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-shield-check"></use></svg></span>
+                <div><strong>One certificate</strong><span>The same signing identity across releases.</span></div>
+              </li>
+            </ul>
+
+            <div class="download-notes">
+              <span class="pill pill-dark">Android 7.0+</span>
+              <span class="pill pill-dark">Direct APK</span>
+              <span class="pill pill-dark"><span data-release-count>5</span> signed builds</span>
+            </div>
+
+            <p class="download-source">
+              <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-github"></use></svg>
+              Downloads are served by GitHub Releases.
+              <a href="https://github.com/jackbarisere8/DOCMAC/releases">View repository <svg class="icon icon-sm" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+            </p>
+          </div>
+
+          <aside class="release-card" aria-labelledby="release-card-title">
+            <div class="release-head">
+              <img class="release-logo" src="assets/images/docmac-icon-192.png" alt="" width="48" height="48" />
+              <div>
+                <span id="release-card-title">DOCMAC FOR ANDROID</span>
+                <strong id="release-version" data-release-version>v1.0.4</strong>
+              </div>
+              <b class="verified" title="Signed with the published Docmac certificate"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-badge-check"></use></svg><span class="sr-only">Signed release</span></b>
+            </div>
+
+            <dl class="release-details">
+              <div><dt>Format</dt><dd>Signed APK</dd></div>
+              <div><dt>Size</dt><dd id="release-size" data-release-size>60.5 MB</dd></div>
+              <div><dt>Android</dt><dd id="release-android" data-release-min-android>7.0+</dd></div>
+              <div><dt>Released</dt><dd id="release-date" data-release-date>25 Aug 2026</dd></div>
+            </dl>
+
+            <a id="download-button" class="download-primary" href="https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk" aria-label="Download the latest Docmac APK">
+              <span class="download-primary-copy">
+                <strong>Download <span data-release-version>v1.0.4</span></strong>
+                <small><span data-release-size>60.5 MB</span> · Signed APK</small>
+              </span>
+              <span class="download-primary-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+            </a>
+            <p id="device-hint" class="device-hint" role="status"></p>
+
+            <div id="qr-card" class="qr-card" hidden>
+              <img src="assets/images/qr-download.svg" alt="QR code to download Docmac on Android" width="130" height="130" loading="lazy" decoding="async" />
+              <div><strong>Scan to download on Android</strong><p>Open your camera on an Android phone to get the latest official APK directly.</p></div>
+            </div>
+
+            <details class="release-notes release-notes-latest" open>
+              <summary>What’s new in <span data-release-version>v1.0.4</span><span class="notes-toggle" aria-hidden="true">+</span></summary>
+              <p class="release-notes-body" id="latest-notes-body">Redesigned the Talk inbox and conversation experience. Added in-conversation message sending and removed the obsolete archive route.</p>
+            </details>
+
+            <button id="release-history-toggle" class="release-history-toggle" type="button" aria-expanded="false" aria-controls="previous-releases" hidden>See previous releases <span aria-hidden="true">+</span></button>
+            <div id="previous-releases" class="previous-releases" role="group" aria-label="Previous Docmac APK releases" hidden></div>
+            <p id="release-status" class="release-status" role="status" aria-live="polite"></p>
+
+            <section id="release-integrity" class="release-integrity" aria-labelledby="integrity-title">
+              <h3 id="integrity-title">Verify your download</h3>
+              <p>Every release is signed with the same Docmac certificate. Compare these values before installing.</p>
+              <div class="integrity-row">
+                <span class="integrity-label">SHA-256</span>
+                <code id="latest-sha256">Loading…</code>
+                <button class="copy-button" type="button" data-copy-target="latest-sha256" disabled>Copy</button>
+              </div>
+              <div class="integrity-row">
+                <span class="integrity-label">Certificate SHA-256</span>
+                <code id="latest-cert">Loading…</code>
+                <button class="copy-button" type="button" data-copy-target="latest-cert" disabled>Copy</button>
+              </div>
+              <details class="verify-help">
+                <summary>How to check <span aria-hidden="true">+</span></summary>
+                <p>On Windows, open PowerShell in your Downloads folder and run:</p>
+                <pre><code>certutil -hashfile app-release.apk SHA256</code></pre>
+                <p>On macOS or Linux:</p>
+                <pre><code>sha256sum app-release.apk</code></pre>
+                <p>To inspect the signing certificate on a computer with Android build tools:</p>
+                <pre><code>apksigner verify --print-certs app-release.apk</code></pre>
+                <p>The output must match the two values above. A checksum confirms the file matches what was published; Android still performs its own install checks.</p>
+              </details>
+              <p class="integrity-note"><a id="latest-release-page" href="https://github.com/jackbarisere8/DOCMAC/releases/latest">View this release on GitHub</a> · <a href="checksums.txt">All SHA-256 checksums</a></p>
+            </section>
+
+            <noscript>
+              <p class="release-status">JavaScript is disabled, so the full version list and live checksums are hidden. The download button still points to the latest official APK. You can find every version and checksum on the <a href="https://github.com/jackbarisere8/DOCMAC/releases">Docmac GitHub releases page</a>.</p>
+            </noscript>
+
+            <div class="apk-disclaimer">
+              <strong>About Android’s APK warning</strong>
+              <p>Android or your browser may flag an APK downloaded from the web because it is not installed through Google Play. That warning does not by itself mean the file is harmful. This page links only to Docmac’s official signed GitHub release. Download only from this website, check the SHA-256 above, and do not install modified copies from other sources.</p>
+            </div>
+            <p class="release-note">By downloading, you agree to the <a href="terms.html">Terms</a> and acknowledge the <a href="privacy.html">Privacy Policy</a>.</p>
+            <p class="direct-download-note">Every version links to its own signed APK. Older versions remain online.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-paper faq-section">
+      <div class="shell faq-layout">
+        <div class="faq-intro" data-reveal>
+          <h2 class="display">Questions,<br /><em>answered.</em></h2>
+          <p class="lede">The practical details about downloading, installing, and checking Docmac on Android.</p>
+          <a class="text-link" href="support.html">More support <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+        </div>
+
+        <div class="faq-list" data-reveal style="--reveal-delay: 80ms;">
+          <details class="faq-item" open>
+            <summary>Is this the official Docmac download?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>Yes. This page links directly to the official Docmac GitHub release and publishes a SHA-256 checksum for every version. Always download Docmac from this page and compare the checksum before installing.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why does Android ask for permission to install?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>Docmac is distributed as an APK, so Android may ask you to allow installs from the browser or file manager you used. This setting can be changed again in Android settings at any time.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Which version should I download?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>The latest release is the recommended choice. It contains the newest fixes and is the version shown in the download card above. Older versions are kept for compatibility and testing.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I install an older version?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>Yes, but Android may refuse to install an older version over a newer one. You may need to uninstall Docmac first, which removes local app data. Back up anything important before downgrading.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How do I verify the APK?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>Use the SHA-256 shown in the <a href="#release-integrity">verification section</a>. On Windows run <code>certutil -hashfile app-release.apk SHA256</code>; on macOS or Linux run <code>sha256sum app-release.apk</code>. The result must match the published value exactly.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What Android version do I need?<span class="faq-toggle" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-plus"></use></svg></span></summary>
+            <p>Docmac supports Android 7.0 (Nougat) and newer. The minimum version is shown on each release card.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-paper promise-section">
+      <div class="shell">
+        <div class="promise-head" data-reveal>
+          <span class="promise-badge"><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-shield-check"></use></svg> A quiet promise</span>
+          <h2 class="display">Made for connection.<br /><em>Not for engagement.</em></h2>
+          <p class="lede">Docmac is not trying to become the place you scroll. It is trying to be the place you go when you actually want to reach someone.</p>
+        </div>
+
+        <div class="promise-feature" data-reveal>
+          <div class="promise-quote">
+            <p>The best social space is not the loudest one. It is the one that helps you be <em>social.</em></p>
+            <p class="promise-quote-copy">That idea shapes the product, the release process, and this website. No invented testimonials. No manufactured urgency. Just a signed Android app and a public record you can check.</p>
+            <a class="text-link" href="#releases">See the release record <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+          </div>
+          <figure class="promise-photo">
+            <img src="assets/images/editorial/dinner.webp" alt="Friends sharing a meal around a table." width="1800" height="1200" loading="lazy" decoding="async" />
+            <figcaption><svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-users-round"></use></svg> Real relationships, not content</figcaption>
+          </figure>
+        </div>
+
+        <div class="promise-grid">
+          <article class="promise-card" data-reveal>
+            <span class="promise-num">01</span>
+            <span class="promise-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-eye-off"></use></svg></span>
+            <h3>No public performance</h3>
+            <p>There is no follower count to chase or feed to feed. The work is the relationship.</p>
+          </article>
+          <article class="promise-card" data-reveal style="--reveal-delay: 80ms;">
+            <span class="promise-num">02</span>
+            <span class="promise-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+            <h3>Direct by design</h3>
+            <p>Every build comes from GitHub Releases, with its own signed APK, checksum, and release notes.</p>
+          </article>
+          <article class="promise-card" data-reveal style="--reveal-delay: 160ms;">
+            <span class="promise-num">03</span>
+            <span class="promise-icon" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-life-buoy"></use></svg></span>
+            <h3>Human support</h3>
+            <p>Questions go to a person, not a maze. Email or message the Docmac team directly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-section" aria-labelledby="closing-title">
+      <div class="closing-panel">
+        <img src="assets/images/editorial/sunset.webp" alt="" width="2000" height="1300" loading="lazy" decoding="async" />
+        <div class="closing-shade"></div>
+        <div class="closing-content" data-reveal>
+          <h2 class="display" id="closing-title">Go be <em>closer.</em></h2>
+          <p class="lede">The people you care about are already in your life. Docmac gives you a quieter place to keep them close.</p>
+          <div class="closing-actions">
+            <a class="btn btn-primary" href="#download">
+              <span>Download Docmac</span>
+              <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-download"></use></svg></span>
+            </a>
+            <a class="btn btn-ghost-light" href="support.html">
+              <span>Visit support</span>
+              <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></span>
+            </a>
+          </div>
+          <div class="closing-meta">
+            <span><i></i> Android 7.0+</span>
+            <span>Latest v1.0.4</span>
+            <span><b data-release-count>5</b> signed releases</span>
+          </div>
+        </div>
+
+        <div class="giant-word" aria-hidden="true">
+          <img src="assets/images/docmac-mark-white.webp" alt="" width="512" height="512" loading="lazy" decoding="async" />
+          <span>docmac</span><i>.</i>
+        </div>
+
+        <div class="closing-legal">
+          <span>© <span data-year>2026</span> Docmac. Private communication, built around people.</span>
+          <nav aria-label="Legal and support">
+            <a href="support.html">Support</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="https://github.com/jackbarisere8/DOCMAC/releases">GitHub</a>
+            <a class="closing-top" href="#main">Back to top <svg class="icon" aria-hidden="true"><use href="assets/icons.svg#i-arrow-up-right"></use></svg></a>
+          </nav>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-layout"><div><a class="brand" href="./"><img src="assets/images/docmac-logo.png" alt="" width="34" height="34" /><span>docmac</span></a><p>Private communication, built around people.</p></div><nav aria-label="Footer navigation"><a href="support.html">Support</a><a href="feedback.html">Feedback</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav><p>© <span id="year"></span> Docmac.</p></div></footer>
-  <script src="assets/script.js?v=20260825-4"></script>
+  <script src="assets/script.js?v=20261026-1"></script>
 </body>
 </html>

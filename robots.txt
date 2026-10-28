@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jackbarisere8.github.io/DOCMAC_WEBSITE/sitemap.xml
+

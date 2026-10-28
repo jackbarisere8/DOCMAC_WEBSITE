@@ -1,0 +1,12 @@
+{
+  "name": "docmac-verifier",
+  "version": "1.0.0",
+  "description": "Docmac APK Verifier Container Service",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {}
+}
+

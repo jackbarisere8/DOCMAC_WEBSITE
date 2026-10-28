@@ -1,0 +1,66 @@
+{
+  "releases": {
+    "1.0.4": {
+      "sha256": "1D4EDC3C546E0818884EAFEB6BBDE3CB911668109871912C7809818AC1DA2E6C",
+      "sha512": "E08416FF2244C48F245E36ECFC75763BD0D8A60F3D905E8555C2DF43E78B6B4CDC2A9FE33CA99E9EB88F4B929ECF21C23C8D9F1D495ABC1F9D7755BCC8BE2E04",
+      "sizeBytes": 63418179,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-10-23T16:02:13.634Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk"
+    },
+    "1.0.3": {
+      "sha256": "AEB2F1CEE5A2BF20E4E925A118C047F3D4ABB558E19B64123AF499A4DD7C9661",
+      "sha512": "A0FFA71CF4CA581A0D8F99DB7D0B260C5B21BBBBD2F4171CACA93A4B551E4D139E4EA976611F69232415BE282E4A0CBA244B13625FAD96B02A6E2FD05C53F63A",
+      "sizeBytes": 61945509,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-10-23T16:03:55.674Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.3/app-release.apk"
+    },
+    "1.0.2": {
+      "sha256": "4FEB0B2B903B285DC3FA7281C3FF3A7B63FCC0F21D034D5859FC65CAD1E081C8",
+      "sha512": "199A879C0A794206885AB72834C0CF465F0A07A766FCFA4F5DD9DEA4D66BE2DAC2B0717F866785322FACD7D3EBE2861791F66BFB59A6BB7546822FC088A43269",
+      "sizeBytes": 61256029,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-10-23T16:06:40.788Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.2/app-release.apk"
+    },
+    "1.0.1": {
+      "sha256": "0E818533B49D739E31BC3C83716E026F032E2FFC5F6ED4BC772A13B1CFDE1359",
+      "sha512": "D976461C0EADC0EB8A741EC8D859BC9FD836109C2775CA981DDA0B79AAE5CAB08E308BF4D8F78B56A3F2C9DDF1B6B53DF132069DA79FD1D8ED899D97A671512D",
+      "sizeBytes": 61004347,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-10-23T16:09:40.742Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.1/app-release.apk"
+    },
+    "1.0.0": {
+      "sha256": "26459B9675DBC0B6420BEE1031500A70E27B994AF6ADEA911FF6B41A4E656767",
+      "sha512": "96753420AE413D846FF3F7D5ECF22AC8801A87D0A6FC87644A03A47CFD89EC5BF94F9328D5BC72D5368203288B95168B96809B4FA8E4C9F0E444F53AC06EA4A9",
+      "sizeBytes": 61004343,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-10-23T16:13:22.895Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.0/app-release.apk"
+    }
+  },
+  "generatedAt": "2026-10-23T16:13:22.897Z",
+  "repo": "jackbarisere8/DOCMAC"
+}

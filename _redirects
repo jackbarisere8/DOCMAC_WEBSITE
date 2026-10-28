@@ -1,0 +1,11 @@
+# Cloudflare Pages redirect rules (GitHub Pages ignores this file).
+# These targets are the official GitHub release assets, so no API or CDN
+# hostname is required while the release service remains undeployed.
+
+/download             https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk  302
+/download/latest      https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk  302
+/download/1.0.4       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk  302
+/download/1.0.3       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.3/app-release.apk  302
+/download/1.0.2       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.2/app-release.apk  302
+/download/1.0.1       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.1/app-release.apk  302
+/download/1.0.0       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.0/app-release.apk  302

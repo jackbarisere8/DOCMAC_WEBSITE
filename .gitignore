@@ -1,0 +1,18 @@
+# Cache and dependencies
+.cache/
+node_modules/
+
+# Generated deployment artifact
+_site/
+
+# Local database backups (operational artifacts)
+data/backups/
+
+# Python bytecode caches
+__pycache__/
+*.pyc
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+

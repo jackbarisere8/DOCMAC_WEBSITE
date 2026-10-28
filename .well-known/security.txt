@@ -1,0 +1,5 @@
+Contact: mailto:jackbarisere8@gmail.com
+Expires: 2027-10-25T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://jackbarisere8.github.io/DOCMAC_WEBSITE/.well-known/security.txt
+Policy: https://jackbarisere8.github.io/DOCMAC_WEBSITE/privacy.html
