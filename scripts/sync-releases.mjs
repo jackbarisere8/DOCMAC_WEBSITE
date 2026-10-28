@@ -14,7 +14,7 @@
  *
  * Environment:
  *   GITHUB_TOKEN         Optional, raises the GitHub API rate limit.
- *   GITHUB_REPOSITORY    Optional, defaults to jackbarisere8/DOCMAC.
+ *   RELEASES_REPOSITORY  Optional, defaults to jackbarisere8/DOCMAC.
  */
 
 import fs from 'node:fs';
@@ -25,7 +25,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const REPO = process.env.GITHUB_REPOSITORY || 'jackbarisere8/DOCMAC';
+const REPO = process.env.RELEASES_REPOSITORY || 'jackbarisere8/DOCMAC';
 const TOKEN = process.env.GITHUB_TOKEN || '';
 const FORCE = process.argv.includes('--force');
 

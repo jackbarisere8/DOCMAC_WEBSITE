@@ -35,8 +35,9 @@ jobs:
         run: node scripts/sync-releases.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_REPOSITORY is reserved by Actions, so use our own name.
           # Release assets live in the Flutter app repo, not this website repo.
-          GITHUB_REPOSITORY: jackbarisere8/DOCMAC
+          RELEASES_REPOSITORY: jackbarisere8/DOCMAC
 
       - name: Rebuild release pages and sitemap
         run: npm run build:pages
