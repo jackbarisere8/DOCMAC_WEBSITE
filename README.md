@@ -106,6 +106,8 @@ python -m http.server 8080 --directory _site
 ## Publishing a new APK
 
 1. Copy `.github/workflows/release-apk.yml` into the Flutter app repository (`jackbarisere8/DOCMAC`) and run **Release APK** from its Actions tab. The workflow builds a signed APK using the `KEYSTORE_*` secrets and publishes it as GitHub Release `v<versionName>`. Publishing the GitHub Release manually with an `app-release.apk` asset also works.
+
+   Run the workflow from the app repository, not this website repository. Add `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, and `KEY_PASSWORD` to the app repository's `production` environment. `KEYSTORE_BASE64` is the single-line base64 encoding of `android/keystore/docmac-upload.jks`; the other values are the entries in `android/key.properties`. Add `WEBSITE_SYNC_TOKEN` there too if the release should trigger the website sync immediately.
 2. Optionally add curated notes and channel metadata for the version in `data/release-meta.json`.
 3. Run the sync:
 

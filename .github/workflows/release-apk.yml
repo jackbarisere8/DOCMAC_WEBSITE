@@ -34,20 +34,29 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: release-apk-${{ inputs.channel }}
-  cancel-in-progress: false
-
 jobs:
   release:
     name: Build, Verify, and Publish Android APK
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: production # Requires manual approval in GitHub repository settings
+    # Job-level concurrency is used because workflow-level concurrency does not
+    # reliably resolve workflow_dispatch inputs.
+    concurrency:
+      group: release-apk-${{ inputs.channel }}
+      cancel-in-progress: false
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v7
+
+      - name: Confirm app repository
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REPOSITORY" != "jackbarisere8/DOCMAC" ]; then
+            echo "::error::Run this workflow from jackbarisere8/DOCMAC. The website repository does not contain the Flutter app or the release signing secrets."
+            exit 1
+          fi
 
       - name: Validate release inputs
         env:
