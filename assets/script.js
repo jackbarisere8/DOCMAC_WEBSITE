@@ -570,6 +570,7 @@
       day: 'numeric',
       month: 'short',
       year: 'numeric',
+      timeZone: 'UTC',
     }).format(date);
   };
 
@@ -600,6 +601,7 @@
   const arcStatus = $('[data-arc-status]');
 
   const SITE_ROOT = new URL('../', SCRIPT_URL);
+  const SITE_APK_URL = new URL('downloads/docmac-latest.apk', SITE_ROOT).href;
   const releasePageHref = (release) =>
     new URL(`releases/${encodeURIComponent(release.versionName)}.html`, SITE_ROOT).href;
 
@@ -753,7 +755,9 @@
       return;
     }
 
-    releases.forEach((release) => {
+    // The hero tab strip is a five-column grid. Keep the five most recent
+    // builds there; the full archive remains available in the carousel.
+    releases.slice(0, 5).forEach((release) => {
       const tab = document.createElement('button');
       tab.type = 'button';
       tab.className = 'release-tab';
@@ -1034,6 +1038,7 @@
     const downloadUrl = safeHttpsUrl(release.downloadUrl);
     download.href = downloadUrl || '#download';
     if (!downloadUrl) download.setAttribute('aria-disabled', 'true');
+    download.setAttribute('download', `docmac-${release.versionName}.apk`);
     download.setAttribute('aria-label', `Download Docmac ${versionLabel(release)} APK`);
     download.innerHTML = 'Download <span aria-hidden="true">↓</span>';
 
@@ -1106,8 +1111,10 @@
     setText('[data-release-date]', formatDate(latest.publishedAt));
 
     if (downloadButton) {
-      const downloadUrl = safeHttpsUrl(latest.downloadUrl);
-      if (downloadUrl) downloadButton.href = downloadUrl;
+      // Serve the latest APK from this site so the click starts a download
+      // without opening GitHub. The build stages the verified file at this path.
+      downloadButton.href = SITE_APK_URL;
+      downloadButton.setAttribute('download', `docmac-${latest.versionName}.apk`);
       downloadButton.setAttribute('aria-label', `Download Docmac ${versionLabel(latest)} APK`);
     }
 

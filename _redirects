@@ -1,9 +1,11 @@
 # Cloudflare Pages redirect rules (GitHub Pages ignores this file).
-# These targets are the official GitHub release assets, so no API or CDN
-# hostname is required while the release service remains undeployed.
+# The latest APK is staged into /downloads/ by the site build, so these
+# redirects stay on-site. Historical versions still point at the official
+# GitHub release assets until the R2 migration is deployed.
 
-/download             https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk  302
-/download/latest      https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk  302
+/download             /downloads/docmac-latest.apk  302
+/download/latest      /downloads/docmac-latest.apk  302
+/download/1.0.5       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.5/app-release.apk  302
 /download/1.0.4       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.4/app-release.apk  302
 /download/1.0.3       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.3/app-release.apk  302
 /download/1.0.2       https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.2/app-release.apk  302

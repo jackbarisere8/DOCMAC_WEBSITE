@@ -1,5 +1,17 @@
 {
   "releases": {
+    "1.0.5": {
+      "sha256": "C15F3E597DF1273D95FE1CE96F5D27F4D8B243F5B6D2063E95CE63E1C382794A",
+      "sha512": "A4AD923B6F1E12250E7B05FBF6F3471BF05700FEAFC50FB3CB19CE823030A1BBD3FBB364DC8BBA37D2499E2DF039546667259B622FC3302869F3313A39AAD814",
+      "sizeBytes": 67123736,
+      "signatureSha256": "40:48:E0:03:BA:37:E9:03:A3:3F:24:0A:68:4F:6F:A3:83:F3:F1:6E:EE:28:B5:2B:E9:4B:47:18:D3:13:93:C6",
+      "certificateSubject": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateIssuer": "C=ng, ST=akwa ibom, L=uyo, O=docmac, OU=docmac, CN=jack barisere",
+      "certificateValidFrom": "2026-08-18T13:48:54.000Z",
+      "certificateValidTo": "2054-01-03T13:48:54.000Z",
+      "checkedAt": "2026-11-09T00:09:25.981Z",
+      "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.5/app-release.apk"
+    },
     "1.0.4": {
       "sha256": "1D4EDC3C546E0818884EAFEB6BBDE3CB911668109871912C7809818AC1DA2E6C",
       "sha512": "E08416FF2244C48F245E36ECFC75763BD0D8A60F3D905E8555C2DF43E78B6B4CDC2A9FE33CA99E9EB88F4B929ECF21C23C8D9F1D495ABC1F9D7755BCC8BE2E04",
@@ -61,6 +73,6 @@
       "source": "https://github.com/jackbarisere8/DOCMAC/releases/download/v1.0.0/app-release.apk"
     }
   },
-  "generatedAt": "2026-10-23T16:13:22.897Z",
+  "generatedAt": "2026-11-09T00:09:25.982Z",
   "repo": "jackbarisere8/DOCMAC"
 }

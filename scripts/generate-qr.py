@@ -465,7 +465,7 @@ if __name__ == "__main__":
     url = (
         sys.argv[1]
         if len(sys.argv) > 1
-        else "https://github.com/jackbarisere8/DOCMAC/releases/latest/download/app-release.apk"
+        else "https://jackbarisere8.github.io/DOCMAC_WEBSITE/downloads/docmac-latest.apk"
     )
     out_file = sys.argv[2] if len(sys.argv) > 2 else "assets/images/qr-download.svg"
     version = choose_version(url)

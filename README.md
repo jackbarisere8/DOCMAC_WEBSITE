@@ -21,7 +21,7 @@ The official landing page, release catalogue, and download-verification site for
 ## What the static site includes
 
 - **Single source of truth:** every published GitHub release is synced into `releases.json`, including `v1.0.0` through the current version.
-- **Downloads:** direct links to official signed APK assets on GitHub Releases.
+- **Downloads:** the latest verified APK is staged into `_site/downloads/docmac-latest.apk` and served from the website itself, so clicking Download starts the file immediately instead of opening GitHub. Historical releases link to their official signed GitHub assets.
 - **Integrity:** SHA-256 and SHA-512 hashes, the APK signing-certificate SHA-256 fingerprint, and a `sha256sum`-compatible `checksums.txt`.
 - **Release history:** dates, sizes, minimum Android version, curated notes, and permanent pages such as `releases/1.0.4.html`.
 - **Accessibility and theming:** mobile drawer with focus trap, Escape handling, skip link, reduced-motion support, and persistent light/dark/system themes.
@@ -61,6 +61,7 @@ The official landing page, release catalogue, and download-verification site for
 │   ├── fetch-fonts.mjs        Downloads and self-hosts fonts
 │   ├── generate-qr.py         Verifiable SVG QR generator (V4/V5-M)
 │   ├── health-check.mjs       Target API/edge synthetic probe
+│   ├── stage-apk.mjs          Stages the verified latest APK for same-origin downloads
 │   ├── sync-releases.mjs      Syncs, hashes, and verifies APK assets
 │   └── validate.mjs           Links, anchors, manifest, checksum validation
 ├── verifier/                  Target containerized APK verifier
@@ -79,14 +80,20 @@ The official landing page, release catalogue, and download-verification site for
 Node.js 24 or newer is required. The site itself has no runtime dependencies.
 
 ```bash
-# Regenerate release pages and the deployable _site/ directory
+# Regenerate release pages, stage the verified latest APK, and build _site/
 npm run build
+
+# Same as build, but skip the ~64 MB APK download/staging step
+npm run build:no-apk
 
 # Build only the release pages and sitemap
 npm run build:pages
 
-# Stage only public files for deployment
+# Stage only public files for deployment (no APK)
 npm run build:site
+
+# Stage the latest APK after a custom build
+npm run stage:apk
 
 # Validate links, anchors, fonts, manifest, checksums, and generated pages
 npm run validate
@@ -116,13 +123,15 @@ python -m http.server 8080 --directory _site
    ```
 
    The sync downloads any missing APK, computes SHA-256/SHA-512 and the signing-certificate fingerprint, prunes stale integrity entries, updates `releases.json`, and rewrites `checksums.txt`.
-4. Rebuild generated pages and validate:
+4. Rebuild generated pages, stage the latest APK, and validate:
 
    ```bash
    npm run build
    npm run validate
    npm test
    ```
+
+   `npm run build` downloads the latest APK into `.cache/apk/` (or reuses the copy the sync just downloaded), verifies its SHA-256 against `releases.json`, and writes it to `_site/downloads/docmac-latest.apk`. That file is part of the deployment artifact but is never committed to git.
 
 5. Commit and push `releases.json`, `checksums.txt`, `data/apk-integrity.json`, `releases/`, and `sitemap.xml`.
 
@@ -132,7 +141,7 @@ The release workflow can dispatch that sync immediately when `WEBSITE_SYNC_TOKEN
 
 ## Verifying downloads
 
-`checksums.txt` uses the canonical filename pattern `docmac-<version>.apk`. GitHub serves every asset as `app-release.apk`, so rename the downloaded file before verifying:
+`checksums.txt` uses the canonical filename pattern `docmac-<version>.apk`. The website's Download button saves the file with that name. Historical GitHub assets are still served as `app-release.apk`, so rename those before verifying:
 
 ```bash
 mv app-release.apk docmac-1.0.4.apk
@@ -143,13 +152,13 @@ Or verify a single file:
 
 ```bash
 # Linux / macOS
-sha256sum docmac-1.0.4.apk
+sha256sum docmac-1.0.5.apk
 
 # Windows PowerShell / Command Prompt
-certutil -hashfile docmac-1.0.4.apk SHA256
+certutil -hashfile docmac-1.0.5.apk SHA256
 
 # Android signing certificate
-apksigner verify --print-certs docmac-1.0.4.apk
+apksigner verify --print-certs docmac-1.0.5.apk
 ```
 
 Compare the certificate SHA-256 with the fingerprint published in `releases.json` and on the homepage.
@@ -203,12 +212,25 @@ npx wrangler d1 migrations apply DB --remote
 npx wrangler deploy
 ```
 
+### Is it time to deploy Cloudflare?
+
+Not for APK distribution. The static site now stages and serves the latest APK itself, so downloads no longer need a backend. Deploy the Cloudflare release service when at least one of these becomes true:
+
+- Download traffic approaches the GitHub Pages limits (1 GB site, roughly 100 GB/month bandwidth) or you need immutable versioned CDN URLs and download analytics.
+- You want a custom domain (`docmac.app`) with security headers, redirects, and preview deploys.
+- The Android app needs the `GET /v1/apps/docmac/update` in-app update check.
+- You want persistent feedback intake or the admin upload/verify/publish console.
+
+A sensible phased path is Cloudflare Pages for the site, then R2 for APKs, then the Worker API/admin when the app needs it. Deploying the full service adds D1 migrations, an R2 bucket, secrets, Cloudflare Access, backups, and monitoring, so it is not worth the operational overhead while GitHub Pages handles the current volume.
+
+> The app's missing brand-new-chat, account-deletion, and reset-email features are **Firebase Cloud Functions** work (the Blaze plan), not Cloudflare. This release service does not fix them.
+
 See [`docs/BACKEND_ARCHITECTURE.md`](docs/BACKEND_ARCHITECTURE.md) and [`docs/RUNBOOKS.md`](docs/RUNBOOKS.md). Both documents describe target infrastructure.
 
 ## Hosting notes
 
-- **GitHub Pages (current):** `deploy-site.yml` uploads only `_site/`. GitHub Pages cannot apply custom response headers.
-- **Cloudflare Pages (optional future host):** `_headers` and `_redirects` are provided and now point only at working GitHub release assets. They have no effect on GitHub Pages.
+- **GitHub Pages (current):** `deploy-site.yml` uploads only `_site/`, including the staged `downloads/docmac-latest.apk` (about 64 MB). GitHub Pages cannot apply custom response headers, but same-origin links plus the `download` attribute start the download without leaving the site.
+- **Cloudflare Pages (optional future host):** `_headers` and `_redirects` are provided. `/download` and `/download/latest` point at the staged on-site APK; versioned links point at the matching GitHub release asset. They have no effect on GitHub Pages.
 - The custom domains `docmac.app`, `api.docmac.app`, and `downloads.docmac.app` are **not verified or live**. Do not add public links or form actions that depend on them until DNS, TLS, and the services are actually deployed.
 
 ## Security

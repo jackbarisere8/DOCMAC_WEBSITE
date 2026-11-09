@@ -13,6 +13,12 @@
     "whatsapp": "+2349047876270"
   },
   "releases": {
+    "1.0.5": {
+      "channel": "stable",
+      "notes": "- Fixed the Talk error state so failed conversations show a clear recovery path.\n- Pinned Connections search results while browsing.\n- Deployed updated Firestore security rules and indexes.\n- New-chat creation, account deletion, and reset-email delivery still need the next Cloud Functions deployment.\n- End-to-end encryption is not implemented in this build.",
+      "yanked": false,
+      "forceUpdate": false
+    },
     "1.0.4": {
       "channel": "stable",
       "notes": "- Redesigned the Talk inbox and conversation experience.\n- Added in-conversation message sending.\n- Updated Talk interaction coverage and removed the obsolete archive route.\n- Bumped the app to version 1.0.4 (build 5).",

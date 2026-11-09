@@ -15,8 +15,9 @@ const OUTPUT_DIR = path.join(ROOT, 'releases');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 
 const SITE_URL = 'https://jackbarisere8.github.io/DOCMAC_WEBSITE';
-const SITE_UPDATED = '2026-10-26';
-const ASSET_VERSION = '20261026-1';
+const SITE_UPDATED = '2026-11-09';
+const ASSET_VERSION = '20261109-1';
+const SITE_APK_PATH = '../downloads/docmac-latest.apk';
 
 const escapeHtml = (value) =>
   String(value ?? '').replace(
@@ -49,6 +50,7 @@ function formatDate(isoDate) {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
+    timeZone: 'UTC',
   }).format(date);
 }
 
@@ -77,9 +79,12 @@ function renderReleasePage(release, latest, allReleases) {
   const sha = escapeHtml(release.sha256 || 'Not published');
   const cert = escapeHtml(release.signatureSha256 || 'Not published');
   const fileName = escapeHtml(release.fileName || 'app-release.apk');
-  const downloadUrl = escapeHtml(
-    safeHttpsUrl(release.downloadUrl, 'https://github.com/jackbarisere8/DOCMAC/releases'),
-  );
+  const downloadUrl = isLatest
+    ? SITE_APK_PATH
+    : escapeHtml(
+        safeHttpsUrl(release.downloadUrl, 'https://github.com/jackbarisere8/DOCMAC/releases'),
+      );
+  const downloadAttribute = ` download="docmac-${version}.apk"`;
   const releaseUrl = escapeHtml(
     safeHttpsUrl(release.releaseUrl, 'https://github.com/jackbarisere8/DOCMAC/releases'),
   );
@@ -198,7 +203,7 @@ function renderReleasePage(release, latest, allReleases) {
         <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
           <span data-theme-icon aria-hidden="true"><svg class="icon"><use href="../assets/icons.svg#i-moon"></use></svg></span>
         </button>
-        <a class="nav-cta" href="${downloadUrl}" rel="noopener">
+        <a class="nav-cta" href="${downloadUrl}"${downloadAttribute} rel="noopener">
           <span>Download APK</span>
           <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="../assets/icons.svg#i-download"></use></svg></span>
         </a>
@@ -230,7 +235,7 @@ function renderReleasePage(release, latest, allReleases) {
         <aside class="page-hero-aside glass" aria-label="Release summary" data-reveal style="--reveal-delay: 90ms;">
           <span class="hud-source-icon" aria-hidden="true"><svg class="icon"><use href="../assets/icons.svg#i-shield-check"></use></svg></span>
           <strong>${heroAsideBadge}</strong>
-          <p>One signing identity across the archive. The APK and its SHA-256 are published together on GitHub Releases.</p>
+          <p>One signing identity across the archive. The APK and its SHA-256 are published together, with GitHub Releases as the source of truth.</p>
           <div class="pill-row">
             <span class="pill">v${version}</span>
             <span class="pill">${size}</span>
@@ -267,7 +272,7 @@ function renderReleasePage(release, latest, allReleases) {
                 <strong>${fileName}</strong>
                 <span>Docmac v${version} · ${size} · Android ${minAndroid}+</span>
               </p>
-              <a class="btn btn-primary" href="${downloadUrl}" rel="noopener" aria-label="Download Docmac v${version} APK">
+              <a class="btn btn-primary" href="${downloadUrl}"${downloadAttribute} rel="noopener" aria-label="Download Docmac v${version} APK">
                 <span>Download v${version}</span>
                 <span class="btn-badge" aria-hidden="true"><svg class="icon"><use href="../assets/icons.svg#i-download"></use></svg></span>
               </a>
@@ -283,7 +288,7 @@ function renderReleasePage(release, latest, allReleases) {
 
           <section id="integrity">
             <h2>Cryptographic integrity</h2>
-            <p>Compare the SHA-256 hash on your device before installing to ensure the file matches the official build. The GitHub asset is named <code>${fileName}</code>.</p>
+            <p>Compare the SHA-256 hash on your device before installing to ensure the file matches the official build. The download is saved as <code>docmac-${version}.apk</code>; the GitHub asset is named <code>${fileName}</code>.</p>
 
             <div class="integrity-row">
               <span class="integrity-label">SHA-256</span>

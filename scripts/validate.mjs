@@ -31,6 +31,13 @@ const EXCLUDED_DIRECTORIES = new Set([
 const errors = [];
 const warnings = [];
 
+// The latest APK is staged into _site/downloads/ by scripts/stage-apk.mjs and
+// is deliberately not committed to git. Resolve those links against the build
+// artifact instead of the source tree.
+const GENERATED_LINKS = new Map([
+  [path.join(ROOT, 'downloads', 'docmac-latest.apk'), path.join(ROOT, '_site', 'downloads', 'docmac-latest.apk')],
+]);
+
 function fail(message) {
   errors.push(message);
 }
@@ -140,6 +147,16 @@ for (const file of htmlFiles) {
       let exists = fs.existsSync(target);
       if (exists && fs.statSync(target).isDirectory()) {
         exists = fs.existsSync(path.join(target, 'index.html'));
+      }
+      if (!exists && GENERATED_LINKS.has(target)) {
+        const generatedTarget = GENERATED_LINKS.get(target);
+        exists = fs.existsSync(generatedTarget);
+        if (!exists) {
+          fail(
+            `${name}: "${value}" is a generated download; run "npm run build" first (${relative(generatedTarget)} is missing)`,
+          );
+          continue;
+        }
       }
       if (!exists) {
         fail(`${name}: broken local link "${value}" (${relative(target)})`);
@@ -309,6 +326,18 @@ if (manifest) {
       const page = readHtml(releasePage);
       if (!page.includes(release.sha256)) fail(`releases/${fileName} does not contain the published SHA-256`);
     }
+  }
+
+  const stagedApk = path.join(ROOT, '_site', 'downloads', 'docmac-latest.apk');
+  if (fs.existsSync(stagedApk)) {
+    const stagedSize = fs.statSync(stagedApk).size;
+    if (manifest.latest && stagedSize !== manifest.latest.sizeBytes) {
+      fail(
+        `_site/downloads/docmac-latest.apk is ${stagedSize} bytes but releases.json expects ${manifest.latest.sizeBytes}`,
+      );
+    }
+  } else {
+    warn('_site/downloads/docmac-latest.apk is not staged; run npm run build for a complete artifact');
   }
 
   const sitemapPath = path.join(ROOT, 'sitemap.xml');
