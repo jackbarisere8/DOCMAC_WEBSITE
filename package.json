@@ -1,6 +1,6 @@
 {
   "name": "docmac-website",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Docmac Android App Release Platform and Website",
   "private": true,
   "type": "module",

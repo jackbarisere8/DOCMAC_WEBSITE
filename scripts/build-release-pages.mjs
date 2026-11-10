@@ -15,8 +15,8 @@ const OUTPUT_DIR = path.join(ROOT, 'releases');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 
 const SITE_URL = 'https://jackbarisere8.github.io/DOCMAC_WEBSITE';
-const SITE_UPDATED = '2026-11-09';
-const ASSET_VERSION = '20261109-1';
+const SITE_UPDATED = '2026-11-10';
+const ASSET_VERSION = '20261110-1';
 const SITE_APK_PATH = '../downloads/docmac-latest.apk';
 
 const escapeHtml = (value) =>

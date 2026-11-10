@@ -152,13 +152,13 @@ Or verify a single file:
 
 ```bash
 # Linux / macOS
-sha256sum docmac-1.0.5.apk
+sha256sum docmac-1.0.6.apk
 
 # Windows PowerShell / Command Prompt
-certutil -hashfile docmac-1.0.5.apk SHA256
+certutil -hashfile docmac-1.0.6.apk SHA256
 
 # Android signing certificate
-apksigner verify --print-certs docmac-1.0.5.apk
+apksigner verify --print-certs docmac-1.0.6.apk
 ```
 
 Compare the certificate SHA-256 with the fingerprint published in `releases.json` and on the homepage.
